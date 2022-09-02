@@ -318,6 +318,28 @@ const timer = (duration) => {
       content
         .querySelectorAll('.proposalBtn')
         .forEach((btn) => btn.setAttribute('disabled', ''));
+      /* SHOW NEXT QUESTION BUTTON OR END BUTTON */
+      if (quizz.isFinished()) {
+        const endQuizzBtn = `
+          <button
+            id="endQuizzBtn"
+            type="button"
+            class="btn btn-primary col-6 align-self-end"
+          >
+            Finir le quizz
+          </button>
+          `;
+
+        content.querySelector('#proposalList').parentElement.innerHTML +=
+          endQuizzBtn;
+
+        /* BIND END QUIZZ BUTTON EVENT */
+        content
+          .querySelector('#endQuizzBtn')
+          .addEventListener('click', handleEndQuizzBtnClick);
+      } else {
+        renderNextQuestionBtn();
+      }
     }
   }, interval);
 };
